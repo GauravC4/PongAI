@@ -2,6 +2,7 @@ var ball;
 var p1;
 var p2;
 var dumbFactor = 0.3;
+var ai = true;
 
 function setup() { 
   createCanvas(600, 300);
@@ -17,7 +18,8 @@ function draw() {
 	fill(255);
 		 if(ball.pos.x<width/2){
 		 	ball.move(p1)
-			p1.move(ball.pos.y);
+			 if(ai)
+					p1.move(ball.pos.y);
 		 }
 		 else{
 		 	ball.move(p2);
@@ -26,7 +28,8 @@ function draw() {
 		 	}else
 		 		p2.move(ball.pos.y);
 		 }
-		//p1.move(ball.pos.y);
+		if(!ai)
+			p1.move(mouseY);
 		ball.show();
 		p1.show();
 		p2.show();
@@ -77,7 +80,7 @@ function Ball(){
 				this.destroyed = true;
 		}
 		
-		if(this.pos.y<this.size/2 || this.pos.y>height-this.size/2){
+		if(this.pos.y<this.size/2+3 || this.pos.y>height-this.size/2-3){
 			this.vel.y *= -1;
 			this.acc.y *= -1;
 		}
